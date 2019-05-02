@@ -1,0 +1,1 @@
+Analyze link image to extract visual features by using Computer Vision's REST API , i'm using free account Microsoft Azure trial 1 month for get subscription key and base url using souteastasia location : "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/analyze"
