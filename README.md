@@ -2,6 +2,13 @@ Analyze link image to extract visual features by using Computer Vision's REST AP
 
 ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/402d529b-3b70-4849-8dfc-a48598ba0fd8.jpg) ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/screenshoot2.jpg)
 
-Optical Character Recognition
+**Optical Character Recognition**
+
+**1.** Get The response contains a field called "Operation-Location". The "Operation-Location" field contains the URL that you must use for your Get Recognize Text Operation Result operation 
+       [https://southeastasia.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/587f2c6a154055056008f200]
+       
+**2.** Use The "Operation-Location" field for get the result 
+       [https://southeastasia.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/587f2cf1154055056008f201]
+
 
 ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/402d529b-3b70-4849-8dfc-a48598ba0fd8.jpg) ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/optic%20character%20recognize.jpg)
