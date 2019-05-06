@@ -1,8 +1,12 @@
 package com.mobile.bdgit08.cognitiveservice.ocr;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.mobile.bdgit08.cognitiveservice.computervision.ResponseStringListener;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +14,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RecognizeTextOperation extends AsyncTask<String , Void , String> {
+public class RecognizeTextOperation extends AsyncTask<String, Void, String> {
     private String TAG = RecognizeTextOperation.class.getSimpleName();
     private String operationLocation;
     private String stringJson = "";
@@ -34,7 +38,7 @@ public class RecognizeTextOperation extends AsyncTask<String , Void , String> {
 
             URL myUrl = new URL(operationLocation);
             //Create a connection
-            HttpURLConnection connection =(HttpURLConnection)
+            HttpURLConnection connection = (HttpURLConnection)
                     myUrl.openConnection();
             //Set methods and timeouts
             connection.setRequestMethod(REQUEST_METHOD);
@@ -49,11 +53,25 @@ public class RecognizeTextOperation extends AsyncTask<String , Void , String> {
             BufferedReader reader = new BufferedReader(streamReader);
             StringBuilder stringBuilder = new StringBuilder();
             //Check if the line we are reading is not null
-            while((inputLine = reader.readLine()) != null){
+            while ((inputLine = reader.readLine()) != null) {
                 stringBuilder.append(inputLine);
             }
+
+            responseCode = "Response Code : "+connection.getResponseCode();
             //Close our InputStream and Buffered reader
-            stringJson = stringBuilder.toString();
+//            stringJson = stringBuilder.toString();
+            JSONObject json = new JSONObject(stringBuilder.toString()).getJSONObject("recognitionResult");
+            JSONArray jsonArray = json.getJSONArray("lines");
+
+            StringBuilder textImage = new StringBuilder();
+            textImage.append("\n"+"[ RECOGNIZE TEXT IN IMAGE] "+"\n\n");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                textImage.append(jsonObject.get("text")+" \n");
+            }
+
+            textImage.append("\n"+"[ JSON RESULT ] "+"\n\n"+stringBuilder.toString());
+            stringJson = textImage.toString();
             reader.close();
             streamReader.close();
         } catch (Exception e) {

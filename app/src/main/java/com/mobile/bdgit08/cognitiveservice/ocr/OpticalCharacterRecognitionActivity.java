@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,22 +32,27 @@ public class OpticalCharacterRecognitionActivity extends AppCompatActivity imple
     private ImageView imageView;
     private TextView textView;
     private TextView textViewResponseCode;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_optical_character_recognition);
+        setTitle("Optical Character Recognition");
         editTextUrl = findViewById(R.id.edittext_urlimage);
         editTextSubscription = findViewById(R.id.edittext_subscription_key);
         Button button = findViewById(R.id.button_analyze);
         textView = findViewById(R.id.textview_result_analyze);
         imageView = findViewById(R.id.imageview_analyze);
         textViewResponseCode = findViewById(R.id.textview_responsecode);
+        progressBar = findViewById(R.id.progress_bar);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                textView.setText("");
                 if (checkEditText()) {
+                    progressBar.setVisibility(View.VISIBLE);
                     setImage(editTextUrl.getText().toString());
                 } else {
                     checkEditTextEmpty(editTextUrl);
@@ -89,12 +95,12 @@ public class OpticalCharacterRecognitionActivity extends AppCompatActivity imple
     }
 
     @Override
-    public void getResponseString(String responseJson, String responseCode) {
+    public void getResponseString(String result, String responseCode) {
+        progressBar.setVisibility(View.GONE);
         try {
-            JSONObject json = new JSONObject(responseJson);
-            textView.setText(json.toString());
+            textView.setText(result);
             textViewResponseCode.setText(responseCode);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             textView.setText(responseCode);
         }
@@ -105,13 +111,13 @@ public class OpticalCharacterRecognitionActivity extends AppCompatActivity imple
         final Handler handler = new Handler();
         try {
             final RecognizeTextOperation recognizeTextOperation = new RecognizeTextOperation(locationHeader, editTextSubscription.getText().toString(), this);
-            // you must delay 2000ms for execute, if you not , response at RecognizeTextOperation will make status you status waiting
+            // you must add delay operation for execute, if you not , response at RecognizeTextOperation will make status you status waiting
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     recognizeTextOperation.execute();
                 }
-            }, 2000);
+            }, 5000);
             textViewResponseCode.setText(responseCode);
         }catch (Exception e){
             e.printStackTrace();
