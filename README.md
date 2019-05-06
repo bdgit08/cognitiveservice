@@ -4,4 +4,4 @@ Analyze link image to extract visual features by using Computer Vision's REST AP
 
 Optical Character Recognition
 
-![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/402d529b-3b70-4849-8dfc-a48598ba0fd8.jpg) ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/optic character recognize.jpg)
+![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/402d529b-3b70-4849-8dfc-a48598ba0fd8.jpg) ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/optic%20character%20recognize.jpg)
