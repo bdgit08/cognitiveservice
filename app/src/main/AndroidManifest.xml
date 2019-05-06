@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".computervision.ComputerVisionActivity"/>
-        <activity android:name=".ocr.OpticalCharacterRecognitionActivity"/>
+        <activity android:name=".recognize_text.RecognizeTextActivity"/>
     </application>
 
 </manifest>

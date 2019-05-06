@@ -1,4 +1,4 @@
-package com.mobile.bdgit08.cognitiveservice.ocr;
+package com.mobile.bdgit08.cognitiveservice.recognize_text;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,13 +19,9 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.mobile.bdgit08.cognitiveservice.R;
-import com.mobile.bdgit08.cognitiveservice.computervision.ComputerVision;
 import com.mobile.bdgit08.cognitiveservice.computervision.ResponseStringListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class OpticalCharacterRecognitionActivity extends AppCompatActivity implements ResponseStringListener, ResponseLocationHeader {
+public class RecognizeTextActivity extends AppCompatActivity implements ResponseStringListener, ResponseLocationHeader {
 
     private EditText editTextSubscription;
     private EditText editTextUrl;
@@ -37,8 +33,8 @@ public class OpticalCharacterRecognitionActivity extends AppCompatActivity imple
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_optical_character_recognition);
-        setTitle("Optical Character Recognition");
+        setContentView(R.layout.activity_recognize_text);
+        setTitle("Recognize Text");
         editTextUrl = findViewById(R.id.edittext_urlimage);
         editTextSubscription = findViewById(R.id.edittext_subscription_key);
         Button button = findViewById(R.id.button_analyze);
@@ -89,8 +85,8 @@ public class OpticalCharacterRecognitionActivity extends AppCompatActivity imple
     }
 
     private void analyzeImage(String urlImage) {
-        OpticalCharacterRecognition opticalCharacterRecognition = new OpticalCharacterRecognition(urlImage, editTextSubscription.getText().toString(), this);
-        opticalCharacterRecognition.execute();
+        RecognizeText recognizeText = new RecognizeText(urlImage, editTextSubscription.getText().toString(), this);
+        recognizeText.execute();
 
     }
 

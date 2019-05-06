@@ -1,9 +1,7 @@
-package com.mobile.bdgit08.cognitiveservice.ocr;
+package com.mobile.bdgit08.cognitiveservice.recognize_text;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.mobile.bdgit08.cognitiveservice.computervision.ResponseStringListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -11,16 +9,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 
-public class OpticalCharacterRecognition extends AsyncTask<String, Void, String> {
+public class RecognizeText extends AsyncTask<String, Void, String> {
     private static final String TAG = "OpticalCharacterRecogni";
     private String urlImage;
     private String stringJson;
@@ -29,7 +24,7 @@ public class OpticalCharacterRecognition extends AsyncTask<String, Void, String>
     private String uriBase = "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/recognizeText";
     private ResponseLocationHeader listener;
 
-    public OpticalCharacterRecognition(String urlImage, String subscriptionKey, ResponseLocationHeader listener) {
+    public RecognizeText(String urlImage, String subscriptionKey, ResponseLocationHeader listener) {
         this.urlImage = urlImage;
         this.listener = listener;
         this.subscriptionKey = subscriptionKey;
@@ -63,7 +58,6 @@ public class OpticalCharacterRecognition extends AsyncTask<String, Void, String>
             responseCode = "Response Code : " + response.getStatusLine().getStatusCode();
             String headers = Arrays.toString(response.getHeaders("Operation-Location"));
             headers = headers.substring(headers.indexOf("https:")).replace("]","");
-            Log.d("header", "doInBackground: "+headers);
             String [] splitString = headers.split("/");
             Log.d(TAG, "doInBackground: split"+splitString[splitString.length -1]);
             stringJson = headers;

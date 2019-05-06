@@ -1,7 +1,6 @@
-package com.mobile.bdgit08.cognitiveservice.ocr;
+package com.mobile.bdgit08.cognitiveservice.recognize_text;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.mobile.bdgit08.cognitiveservice.computervision.ResponseStringListener;
 
