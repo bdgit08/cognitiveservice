@@ -9,20 +9,28 @@ import android.view.View;
 import android.widget.Button;
 
 import com.mobile.bdgit08.cognitiveservice.computervision.ComputerVisionActivity;
+import com.mobile.bdgit08.cognitiveservice.ocr.OpticalCharacterRecognition;
+import com.mobile.bdgit08.cognitiveservice.ocr.OpticalCharacterRecognitionActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.button_analyze);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.button_analyze:
                 Intent intent = new Intent(getApplicationContext(),ComputerVisionActivity.class);
                 startActivity(intent);
-            }
-        });
+                break;
+            case R.id.button_optical_text_recognition :
+                Intent intent2 = new Intent(getApplicationContext(), OpticalCharacterRecognitionActivity.class);
+                startActivity(intent2);
+                break;
+        }
     }
 }

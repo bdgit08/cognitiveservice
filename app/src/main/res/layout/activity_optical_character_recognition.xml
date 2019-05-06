@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edittext_subscription_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subscription Key"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <EditText
+            android:id="@+id/edittext_urlimage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Link Image"
+            android:inputType="text"
+            android:maxLines="1"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_subscription_key"/>
+
+        <Button
+            android:id="@+id/button_analyze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Analyze Link Image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_urlimage" />
+
+        <ImageView
+            android:id="@+id/imageview_analyze"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:background="#efefef"
+            app:layout_constraintDimensionRatio="h,16:9"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_analyze" />
+
+        <TextView
+            android:id="@+id/textview_responsecode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            style="@style/TextAppearance.AppCompat.Body1"
+            tools:text="Error Code"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_analyze"/>
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:id="@+id/textview_result_analyze"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Json"
+            app:layout_constraintTop_toBottomOf="@+id/textview_responsecode" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

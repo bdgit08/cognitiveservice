@@ -1,4 +1,4 @@
-package com.mobile.bdgit08.cognitiveservice.computervision;
+package com.mobile.bdgit08.cognitiveservice.ocr;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,11 +18,14 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.mobile.bdgit08.cognitiveservice.R;
+import com.mobile.bdgit08.cognitiveservice.computervision.ComputerVision;
+import com.mobile.bdgit08.cognitiveservice.computervision.ResponseStringListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ComputerVisionActivity extends AppCompatActivity implements ResponseStringListener{
+public class OpticalCharacterRecognitionActivity extends AppCompatActivity implements ResponseStringListener, ResponseLocationHeader {
+
     private EditText editTextSubscription;
     private EditText editTextUrl;
     private ImageView imageView;
@@ -32,7 +35,7 @@ public class ComputerVisionActivity extends AppCompatActivity implements Respons
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_computer_vision);
+        setContentView(R.layout.activity_optical_character_recognition);
         editTextUrl = findViewById(R.id.edittext_urlimage);
         editTextSubscription = findViewById(R.id.edittext_subscription_key);
         Button button = findViewById(R.id.button_analyze);
@@ -64,7 +67,6 @@ public class ComputerVisionActivity extends AppCompatActivity implements Respons
     }
 
     private void setImage(final String urlImage) {
-        final Handler handler = new Handler();
         Glide.with(imageView).load(urlImage).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -81,8 +83,9 @@ public class ComputerVisionActivity extends AppCompatActivity implements Respons
     }
 
     private void analyzeImage(String urlImage) {
-        ComputerVision computerVision = new ComputerVision(urlImage, editTextSubscription.getText().toString(), this);
-        computerVision.execute();
+        OpticalCharacterRecognition opticalCharacterRecognition = new OpticalCharacterRecognition(urlImage, editTextSubscription.getText().toString(), this);
+        opticalCharacterRecognition.execute();
+
     }
 
     @Override
@@ -95,5 +98,24 @@ public class ComputerVisionActivity extends AppCompatActivity implements Respons
             e.printStackTrace();
             textView.setText(responseCode);
         }
+    }
+
+    @Override
+    public void getLocationHeader(String locationHeader, String responseCode) {
+        final Handler handler = new Handler();
+        try {
+            final RecognizeTextOperation recognizeTextOperation = new RecognizeTextOperation(locationHeader, editTextSubscription.getText().toString(), this);
+            // you must delay 2000ms for execute, if you not , response at RecognizeTextOperation will make status you status waiting
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    recognizeTextOperation.execute();
+                }
+            }, 2000);
+            textViewResponseCode.setText(responseCode);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
