@@ -10,4 +10,4 @@ Analyze link image to extract visual features by using Computer Vision's REST AP
 **2.** Use The "Operation-Location" field for get the result 
        , You can try in [Here](https://southeastasia.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/587f2cf1154055056008f201)
 
-![](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/recognize_text1.jpg) ![](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/recognize_text2.jpg)  ![](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/20190506_161819.gif)
+![](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/text_recognize.jpg) ![](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/text_recognize2.jpg)  ![](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/20190506_161819.gif)
