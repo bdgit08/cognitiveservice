@@ -1,6 +1,6 @@
 # Azure Cognitive Service
 
-![docs](https://docs.microsoft.com/en-us/azure/cognitive-services/welcome)
+What are Azure Cognitive Services? [docs](https://docs.microsoft.com/en-us/azure/cognitive-services/welcome)
 
 
 **Analyze Image**
