@@ -1,8 +1,6 @@
-package com.mobile.bdgit08.cognitiveservice.computervision;
+package com.mobile.bdgit08.cognitiveservice.analyze_image;
 
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -17,7 +15,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URI;
 
-public class ComputerVision extends AsyncTask<String, Void, String> {
+public class AnalyzeImage extends AsyncTask<String, Void, String> {
     private String urlImage;
     private String stringJson;
     private String responseCode;
@@ -26,7 +24,7 @@ public class ComputerVision extends AsyncTask<String, Void, String> {
     private ResponseStringListener listener;
 
 
-    public ComputerVision(String urlImage, String subscriptionKey,ResponseStringListener listener) {
+    public AnalyzeImage(String urlImage, String subscriptionKey, ResponseStringListener listener) {
         this.urlImage = urlImage;
         this.listener = listener;
         this.subscriptionKey = subscriptionKey;
@@ -39,7 +37,7 @@ public class ComputerVision extends AsyncTask<String, Void, String> {
             URIBuilder builder = new URIBuilder(uriBase);
 
             // Request parameters. All of them are optional.
-            builder.setParameter("visualFeatures", "Categories,Description");
+            builder.setParameter("visualFeatures", "Categories,Description,Brands,Faces,Objects");
             builder.setParameter("language", "en");
 
             // Prepare the URI for the REST API method.

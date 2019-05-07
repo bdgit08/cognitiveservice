@@ -1,4 +1,4 @@
-package com.mobile.bdgit08.cognitiveservice.computervision;
+package com.mobile.bdgit08.cognitiveservice.analyze_image;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -19,20 +20,24 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.mobile.bdgit08.cognitiveservice.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ComputerVisionActivity extends AppCompatActivity implements ResponseStringListener{
+public class AnalyzeImageActivity extends AppCompatActivity implements ResponseStringListener {
     private EditText editTextSubscription;
     private EditText editTextUrl;
     private ImageView imageView;
     private TextView textView;
     private TextView textViewResponseCode;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_computer_vision);
+        setContentView(R.layout.activity_analyze_image);
+        setTitle("Analyze Image");
+        progressBar = findViewById(R.id.progress_bar);
         editTextUrl = findViewById(R.id.edittext_urlimage);
         editTextSubscription = findViewById(R.id.edittext_subscription_key);
         Button button = findViewById(R.id.button_analyze);
@@ -44,6 +49,8 @@ public class ComputerVisionActivity extends AppCompatActivity implements Respons
             @Override
             public void onClick(View view) {
                 if (checkEditText()) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    textView.setText("");
                     setImage(editTextUrl.getText().toString());
                 } else {
                     checkEditTextEmpty(editTextUrl);
@@ -81,19 +88,39 @@ public class ComputerVisionActivity extends AppCompatActivity implements Respons
     }
 
     private void analyzeImage(String urlImage) {
-        ComputerVision computerVision = new ComputerVision(urlImage, editTextSubscription.getText().toString(), this);
-        computerVision.execute();
+        AnalyzeImage analyzeImage = new AnalyzeImage(urlImage, editTextSubscription.getText().toString(), this);
+        analyzeImage.execute();
     }
 
     @Override
     public void getResponseString(String responseJson, String responseCode) {
+        progressBar.setVisibility(View.GONE);
         try {
-            JSONObject json = new JSONObject(responseJson);
-            textView.setText(json.toString());
+            setObjectAnalyze(responseJson);
             textViewResponseCode.setText(responseCode);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             textView.setText(responseCode);
         }
+    }
+
+    private void setObjectAnalyze(String object) throws JSONException {
+        JSONObject jsonObject = new JSONObject(object);
+        StringBuilder stringBuilder = new StringBuilder();
+        if (jsonObject.getJSONArray("categories").length() > 0) {
+            stringBuilder.append("Name     : " + jsonObject.getJSONArray("categories").getJSONObject(0).getString("name") + "\n\n");
+            if (jsonObject.getJSONArray("categories").getJSONObject(0).getJSONObject("detail").getJSONArray("celebrities").length() > 0)
+                stringBuilder.append("Headliner/Celebrity      : " + jsonObject.getJSONArray("categories").getJSONObject(0).getJSONObject("detail").getJSONArray("celebrities").getJSONObject(0).getString("name") + "\n\n");
+        }
+        if (jsonObject.getJSONArray("faces").length() > 0) {
+            stringBuilder.append("Age       : " + jsonObject.getJSONArray("faces").getJSONObject(0).getString("age") + "\n\n");
+            stringBuilder.append("Gender    : " + jsonObject.getJSONArray("faces").getJSONObject(0).getString("gender") + "\n\n");
+        }
+        if (jsonObject.getJSONArray("objects").length() > 0)
+            stringBuilder.append("Object    : " + jsonObject.getJSONArray("objects").getJSONObject(0).getString("object") + "\n\n");
+        if (jsonObject.getJSONArray("brands").length() > 0)
+            stringBuilder.append("Brand     : " + jsonObject.getJSONArray("brands").getJSONObject(0).getString("name") + "\n\n");
+        stringBuilder.append("[ JSON ] " + "\n\n" + object + "\n\n");
+        textView.setText(stringBuilder);
     }
 }

@@ -35,7 +35,7 @@
             android:id="@+id/button_analyze"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Analyze Link Image"
+            android:text="Analyze Image"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittext_urlimage" />
 
@@ -43,7 +43,6 @@
             android:id="@+id/imageview_analyze"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="centerCrop"
             android:layout_marginTop="16dp"
             android:background="#efefef"
             app:layout_constraintDimensionRatio="h,16:9"
@@ -69,6 +68,13 @@
             android:layout_marginTop="16dp"
             tools:text="Json"
             app:layout_constraintTop_toBottomOf="@+id/textview_responsecode" />
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/textview_result_analyze"
+            android:layout_marginTop="16dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

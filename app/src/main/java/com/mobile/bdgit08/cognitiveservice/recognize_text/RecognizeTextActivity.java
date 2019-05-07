@@ -19,7 +19,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.mobile.bdgit08.cognitiveservice.R;
-import com.mobile.bdgit08.cognitiveservice.computervision.ResponseStringListener;
+import com.mobile.bdgit08.cognitiveservice.analyze_image.ResponseStringListener;
 
 public class RecognizeTextActivity extends AppCompatActivity implements ResponseStringListener, ResponseLocationHeader {
 

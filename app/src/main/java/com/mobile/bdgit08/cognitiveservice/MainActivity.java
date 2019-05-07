@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.mobile.bdgit08.cognitiveservice.computervision.ComputerVisionActivity;
+import com.mobile.bdgit08.cognitiveservice.analyze_image.AnalyzeImageActivity;
 import com.mobile.bdgit08.cognitiveservice.recognize_text.RecognizeTextActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_analyze:
-                Intent intent = new Intent(getApplicationContext(),ComputerVisionActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AnalyzeImageActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button_optical_text_recognition :

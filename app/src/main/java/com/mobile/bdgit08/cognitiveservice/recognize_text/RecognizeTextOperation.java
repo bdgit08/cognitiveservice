@@ -2,7 +2,7 @@ package com.mobile.bdgit08.cognitiveservice.recognize_text;
 
 import android.os.AsyncTask;
 
-import com.mobile.bdgit08.cognitiveservice.computervision.ResponseStringListener;
+import com.mobile.bdgit08.cognitiveservice.analyze_image.ResponseStringListener;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -68,7 +68,6 @@ public class RecognizeTextOperation extends AsyncTask<String, Void, String> {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 textImage.append(jsonObject.get("text")+" \n");
             }
-
             textImage.append("\n"+"[ JSON RESULT ] "+"\n\n"+stringBuilder.toString());
             stringJson = textImage.toString();
             reader.close();
