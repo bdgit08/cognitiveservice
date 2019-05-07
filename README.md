@@ -1,6 +1,9 @@
-Analyze link image to extract visual features by using Computer Vision's REST API , i'm using free account Microsoft Azure trial 1 month for get subscription key and base url using souteastasia location : "https://southeastasia.api.cognitive.microsoft.com/vision/v2.0/analyze"
+**Analyze Image**
 
-![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/402d529b-3b70-4849-8dfc-a48598ba0fd8.jpg) ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/screenshoot2.jpg)
+Analyze link image to extract visual features by using Computer Vision's REST API , i'm using free account Microsoft Azure trial 1 month for get subscription key 
+and the region southeastasia , you can try in [Here](https://southeastasia.dev.cognitive.microsoft.com/docs/services/5adf991815e1060e6355ad44/operations/56f91f2e778daf14a499e1fa)
+
+![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/analyze_image.jpg) ![alt text](https://github.com/bdgit08/cognitiveservice/blob/master/example%20image/analyze_image_gif.gif)
 
 **Recognize Text**
 
